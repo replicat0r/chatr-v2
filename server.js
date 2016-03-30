@@ -7,7 +7,7 @@ const chatCat = require('./app')
 app.set('port', PORT)
 app.use(express.static('public'))
 app.set('view engine','ejs')
-
+app.use(chatCat.session);
 
 app.use('/', chatCat.router)
 

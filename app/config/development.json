@@ -1,0 +1,5 @@
+{
+	"host": "http://localhost:3000",
+	"dbURI": "mongodb://test:test@ds025379.mlab.com:25379/chat_app_node",
+	"sessionSecret": "secret"
+}
