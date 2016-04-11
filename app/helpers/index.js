@@ -1,5 +1,6 @@
 'use strict'
 const router = require('express').Router();
+const db = require('../db')
 
 
 let _registerRoutes = (routes, methods) => {
@@ -26,6 +27,32 @@ var route = function(routes){
 	return router;
 }
 
+let findOne = function(profileID){
+    return db.userModel.findOne({
+        'profileId': profileID
+    })
+}
+
+let createNewUser = function(profile){
+    return new Promise((resolve, reject){
+        let newChatUser = new db.userModel({
+            profileId: profile.id,
+            fullName: profile.displayName,
+            profilePic: profile.photos[0].value || ''
+        });
+        newChatUser.save(function(e){
+            if (e){
+                console.log(e);
+                reject(e);
+            }else{
+                resolve(newChatUser)
+            }
+        })
+    })
+}
+
 module.exports = {
-	route:route
+	route,
+    createNewUser,
+    findOne
 }
